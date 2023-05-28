@@ -1,15 +1,28 @@
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import { postCreateUser } from "../services/UserService";
+
 
 const ModalAddNew = (props) => {
 
-  const { show, handleClose } = props;
+  const { show, handleClose, handleUpdateTable } = props;
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
 
-  const handleSaveUser = () => {
+  const handleSaveUser = async () => {
+    let res = await postCreateUser(name, job)
     console.log(">>> Check state: ", "Name = ", name, " job = ", job)
+    if (res && res.id) {
+      handleClose()
+      setName('')
+      setJob('')
+      handleUpdateTable({ first_name: name, id: res.id })
+      //success
+    }
+    else {
+      //error 
+    }
   }
 
   return (

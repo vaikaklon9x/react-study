@@ -2,20 +2,35 @@ import { useState } from 'react';
 import './App.scss';
 import Header from './components/Header';
 
-import TableUsers from './components/TableUser';
 import Container from 'react-bootstrap/Container'
+import { Routes, Route, Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
+import { useEffect } from 'react';
+import AppRoutes from './routes/AppRoute';
+
 
 
 function App() {
 
+  const { user, loginContext } = useContext(UserContext)
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      loginContext(localStorage.getItem('email'), localStorage.getItem('token'))
+    }
+  }, [])
 
   return (
     <>
       <div className='app-container'>
-        <Header />
+
+        {/*<Header />*/}
         <br></br>
+        <Header />
         <Container>
-          <TableUsers />
+          {/*<TableUsers/>*/}
+          <AppRoutes />
         </Container>
 
       </div>

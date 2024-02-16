@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import { postCreateUser } from "../services/UserService";
+import { putUpdateUser } from "../services/UserService"
 
 
 const ModalEditUser = (props) => {
 
-    const { show, handleClose, dataUserEdit } = props;
+    const { show, handleClose, dataUserEdit, handleEditUserFromModal } = props;
     const [name, setName] = useState("");
     const [job, setJob] = useState("");
 
@@ -25,15 +25,27 @@ const ModalEditUser = (props) => {
         }
     }*/
 
+    const handleEditUser = async () => {
+        let res = await putUpdateUser(name, job)
+        if (res && res.updatedAt) {
+            handleEditUserFromModal({
+                first_name: name,
+                id: dataUserEdit.id,
+            })
+            handleClose()
+            //success
+        } else {
+            //error
+        }
+        console.log(res)
+    }
+
     useEffect(() => {
         if (show) {
             setName(dataUserEdit.first_name)
-            setJob(dataUserEdit.job)
         }
     }, [dataUserEdit])
-    const handleEditUser = () => {
 
-    }
 
     return (
         <>
@@ -74,7 +86,7 @@ const ModalEditUser = (props) => {
                     <Button
                         variant="primary"
                         onClick={() => handleEditUser()}>
-                        Save Changes
+                        Confirm
                     </Button>
                 </Modal.Footer>
             </Modal>

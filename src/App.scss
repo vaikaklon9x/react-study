@@ -10,11 +10,76 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-.app-container{
-  .add-new{
+
+.app-container {
+  .login-container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+    flex-direction: column;
+    margin: 0 auto;
+
+    .title {
+      text-align: center;
+      font-size: 23px;
+      font-weight: 600;
+      padding-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .text {
+      font-weight: 600;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 7px;
+      outline: none;
+      border: none;
+      background: #f0f0f0;
+      margin-bottom: 15px;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #dedede;
+        //border: 1px solid #b3b3b3;
+      }
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 3px;
+      outline: none;
+      border: none;
+
+      &.active {
+        background-color: #fe2c55;
+        color: white;
+      }
+
+    }
+
+    button[disabled=disable],
+    button:disabled {
+      cursor: not-allowed;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 25px;
+      cursor: pointer;
+    }
+
+    .input-2 {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 17px;
+        right: 10px;
+        cursor: pointer;
+      }
+    }
   }
 }
